@@ -1,0 +1,208 @@
+<div class="page home-page">
+    <header class="page-header">
+        <div class="greeting">
+            <h1>Olá, <span id="user-name">Cliente</span></h1>
+            <p>Bem-vindo de volta!</p>
+        </div>
+    </header>
+
+    <main class="page-content">
+        <!-- Banner rotativo -->
+        <section class="banner-section">
+            <div class="banner-slider">
+                <div class="banner-slide active">
+                    <div class="banner-content">
+                        <h3>
+                            <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path>
+                            </svg>
+                            Promoção Especial
+                        </h3>
+                        <p>Upgrade seu plano e ganhe 3 meses grátis!</p>
+                    </div>
+                </div>
+                <div class="banner-slide">
+                    <div class="banner-content">
+                        <h3>
+                            <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                            Velocidade Máxima
+                        </h3>
+                        <p>Experimente nossa fibra óptica de 500MB</p>
+                    </div>
+                </div>
+                <div class="banner-slide">
+                    <div class="banner-content">
+                        <h3>
+                            <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M17 2l-5 5-5-5"></path>
+                            </svg>
+                            Entretenimento
+                        </h3>
+                        <p>Assine agora e ganhe streaming grátis</p>
+                    </div>
+                </div>
+            </div>
+            <div class="banner-indicators">
+                <span class="indicator active"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+            </div>
+        </section>
+
+        <!-- Cards de resumo -->
+        <section class="summary-cards">
+            <div class="summary-card invoice-card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <h3>Próxima Fatura</h3>
+                    <p class="card-value" id="valor-fatura">R$ 0,00</p>
+                    <span class="card-subtitle" id="vencimento-fatura">Vencimento: 15/12</span>
+                </div>
+            </div>
+
+            <div class="summary-card usage-card" id="card-wifi">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                        <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                        <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <h3>Banda Larga WiFi</h3>
+                    <p class="card-value" id="velocidade-wifi">200 Mbps</p>
+                    <span class="card-subtitle">Velocidade contratada</span>
+                </div>
+            </div>
+
+            <div class="summary-card usage-card" id="card-consumo-movel">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <h3>Consumo de Dados Móveis</h3>
+                    <p class="card-value" id="consumo-movel">8,5 GB / 15 GB</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-movel" style="width: 57%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-card usage-card" id="card-consumo-ligacoes">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <h3>Consumo de Ligações</h3>
+                    <p class="card-value" id="consumo-ligacoes">150 / 300 min</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-ligacoes" style="width: 50%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-card usage-card" id="card-consumo-sms">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        <path d="M13 8H7"></path>
+                        <path d="M17 12H7"></path>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <h3>Consumo de SMS</h3>
+                    <p class="card-value" id="consumo-sms">250 / 500 SMS</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-sms" style="width: 50%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-card invoice-card" id="card-total-planos" style="cursor: pointer;">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <h3>Total de Planos</h3>
+                    <p class="card-value" id="total-planos">4</p>
+                    <span class="card-subtitle">Planos ativos - <strong class="clique-destaque">Clique para ver</strong></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Meus Planos -->
+        <section class="meus-planos-section" id="meus-planos-section" style="display: none;">
+            <h2 class="section-title">Meus Planos</h2>
+            
+            <div class="planos-detalhados-grid" id="planos-contratados">
+                <!-- Os planos serão renderizados dinamicamente via JavaScript -->
+            </div>
+        </section>
+
+        <!-- Botões de ação rápida -->
+        <section class="quick-actions">
+            <h2 class="section-title">Ações Rápidas</h2>
+            <div class="actions-grid">
+                <button class="action-btn" data-action="fatura">
+                    <span class="action-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                        </svg>
+                    </span>
+                    <span>Ver Fatura</span>
+                </button>
+                <button class="action-btn" data-action="suporte">
+                    <span class="action-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 16v-4"></path>
+                            <path d="M12 8h.01"></path>
+                        </svg>
+                    </span>
+                    <span>Suportes</span>
+                </button>
+                <button class="action-btn" data-action="planos">
+                    <span class="action-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </span>
+                    <span>Planos</span>
+                </button>
+                <button class="action-btn" data-action="loja">
+                    <span class="action-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                    </span>
+                    <span>Produtos</span>
+                </button>
+            </div>
+        </section>
+    </main>
+</div>
+

@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuProvedor - Apresentação do Aplicativo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #3BAA74;
+            --primary-hover: #2d8a5d;
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .presentation-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .slide {
+            display: none;
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 60px;
+            box-shadow: var(--shadow);
+            animation: slideIn 0.5s ease-out;
+            position: relative;
+            z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+        }
+
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(59, 170, 116, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+            animation: cornerGlow 4s infinite ease-in-out;
+        }
+
+        @keyframes cornerGlow {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.8;
+            }
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .slide-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+            animation: titleGlow 3s infinite ease-in-out;
+            text-shadow: 0 0 20px rgba(59, 170, 116, 0.3);
+        }
+
+        @keyframes titleGlow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(59, 170, 116, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(59, 170, 116, 0.5);
+            }
+        }
+
+        .slide-header h2 {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .slide.active .slide-header h2 {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-header p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.6s ease 0.2s;
+        }
+
+        .slide.active .slide-header p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .slide-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .slide-content li {
+            padding: 16px 0;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slide-content li:last-child {
+            border-bottom: none;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            padding: 8px;
+            background: #f1f5f9;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .icon:hover {
+            background: rgba(59, 170, 116, 0.15);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .icon:hover svg {
+            stroke-width: 2.5;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .tech-card {
+            background: var(--bg-secondary);
+            padding: 24px;
+            border-radius: 16px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(59, 170, 116, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .tech-card:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .tech-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .tech-card h3,
+        .tech-card p {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .tech-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .deploy-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .deploy-card {
+            background: var(--bg-secondary);
+            padding: 24px;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .deploy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 170, 116, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .deploy-card:hover::before {
+            left: 100%;
+        }
+
+        .deploy-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .deploy-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .deploy-card li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .deploy-card li:before {
+            content: "✓ ";
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .deploy-card li {
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.4s ease;
+        }
+
+        .slide.active .deploy-card li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.active .deploy-card li:nth-child(1) { transition-delay: 0.1s; }
+        .slide.active .deploy-card li:nth-child(2) { transition-delay: 0.2s; }
+        .slide.active .deploy-card li:nth-child(3) { transition-delay: 0.3s; }
+        .slide.active .deploy-card li:nth-child(4) { transition-delay: 0.4s; }
+        .slide.active .deploy-card li:nth-child(5) { transition-delay: 0.5s; }
+
+        .navigation {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: var(--bg-primary);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(59, 170, 116, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+
+        .nav-btn:hover::before {
+            width: 100px;
+            height: 100px;
+        }
+
+        .nav-btn svg {
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+        }
+
+        .slide-indicator {
+            position: fixed;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .indicator-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator-dot.active {
+            background: var(--bg-primary);
+            width: 32px;
+            border-radius: 6px;
+        }
+
+        .slide-number {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-weight: 600;
+            color: var(--primary-color);
+            box-shadow: var(--shadow);
+            z-index: 100;
+        }
+
+        /* Elementos Flutuantes */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Grid de pontos decorativo */
+        .dot-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            z-index: 1;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        /* Partículas pequenas */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: particleFloat 8s infinite ease-in-out;
+        }
+
+        @keyframes particleFloat {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-100px) translateX(50px);
+                opacity: 0.8;
+            }
+        }
+
+        /* Linhas decorativas */
+        .decorative-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(59, 170, 116, 0.3), transparent);
+            height: 1px;
+            animation: lineMove 15s infinite linear;
+        }
+
+        .decorative-line.vertical {
+            width: 1px;
+            height: 200px;
+            background: linear-gradient(180deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+        }
+
+        @keyframes lineMove {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(200%);
+                opacity: 0;
+            }
+        }
+
+        /* Orbs luminosos */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: orbPulse 6s infinite ease-in-out;
+        }
+
+        @keyframes orbPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.6;
+            }
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: -100px;
+            background: rgba(59, 170, 116, 0.15);
+            animation-delay: 0s;
+            animation-duration: 20s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: -50px;
+            background: rgba(102, 126, 234, 0.15);
+            animation-delay: 2s;
+            animation-duration: 18s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 10%;
+            background: rgba(118, 75, 162, 0.15);
+            animation-delay: 4s;
+            animation-duration: 22s;
+        }
+
+        .floating-element:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 30%;
+            right: 20%;
+            background: rgba(59, 170, 116, 0.2);
+            animation-delay: 1s;
+            animation-duration: 16s;
+        }
+
+        .floating-element:nth-child(5) {
+            width: 250px;
+            height: 250px;
+            bottom: -50px;
+            right: 30%;
+            background: rgba(102, 126, 234, 0.12);
+            animation-delay: 3s;
+            animation-duration: 25s;
+        }
+
+        .floating-element:nth-child(6) {
+            width: 80px;
+            height: 80px;
+            top: 50%;
+            left: 50%;
+            background: rgba(118, 75, 162, 0.18);
+            animation-delay: 5s;
+            animation-duration: 14s;
+        }
+
+        .floating-shape {
+            position: absolute;
+            animation: rotate 30s infinite linear;
+        }
+
+        .floating-shape:nth-child(7) {
+            width: 60px;
+            height: 60px;
+            top: 15%;
+            left: 20%;
+            background: rgba(59, 170, 116, 0.1);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(8) {
+            width: 80px;
+            height: 80px;
+            bottom: 30%;
+            right: 15%;
+            background: rgba(102, 126, 234, 0.1);
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+            animation-delay: 2s;
+        }
+
+        .floating-shape:nth-child(9) {
+            width: 50px;
+            height: 50px;
+            top: 70%;
+            left: 70%;
+            background: rgba(118, 75, 162, 0.12);
+            transform: rotate(45deg);
+            animation-delay: 4s;
+        }
+
+        /* Mais elementos flutuantes */
+        .floating-element:nth-child(10) {
+            width: 120px;
+            height: 120px;
+            top: 25%;
+            right: 10%;
+            background: rgba(59, 170, 116, 0.1);
+            animation-delay: 6s;
+            animation-duration: 17s;
+        }
+
+        .floating-element:nth-child(11) {
+            width: 90px;
+            height: 90px;
+            bottom: 40%;
+            left: 15%;
+            background: rgba(102, 126, 234, 0.12);
+            animation-delay: 7s;
+            animation-duration: 19s;
+        }
+
+        .floating-element:nth-child(12) {
+            width: 180px;
+            height: 180px;
+            top: 5%;
+            right: 25%;
+            background: rgba(118, 75, 162, 0.1);
+            animation-delay: 1.5s;
+            animation-duration: 23s;
+        }
+
+        /* Formas adicionais */
+        .floating-shape:nth-child(13) {
+            width: 70px;
+            height: 70px;
+            top: 40%;
+            left: 5%;
+            background: rgba(59, 170, 116, 0.08);
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            animation-delay: 3s;
+        }
+
+        .floating-shape:nth-child(14) {
+            width: 60px;
+            height: 60px;
+            bottom: 15%;
+            right: 10%;
+            background: rgba(102, 126, 234, 0.1);
+            clip-path: circle(50%);
+            animation: float 12s infinite ease-in-out;
+            animation-delay: 5s;
+        }
+
+        .floating-shape:nth-child(15) {
+            width: 55px;
+            height: 55px;
+            top: 60%;
+            right: 35%;
+            background: rgba(118, 75, 162, 0.09);
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            animation-delay: 6.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(50px, -50px) rotate(90deg);
+            }
+            50% {
+                transform: translate(-30px, -100px) rotate(180deg);
+            }
+            75% {
+                transform: translate(100px, 50px) rotate(270deg);
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Animações nos elementos de conteúdo */
+        .icon {
+            transition: all 0.3s ease;
+        }
+
+        .slide.active .icon {
+            animation: iconBounce 0.6s ease-out;
+            animation-delay: calc(var(--delay, 0) * 0.1s);
+        }
+
+        @keyframes iconBounce {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .slide-content li {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.5s ease;
+        }
+
+        .slide.active .slide-content li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.active .slide-content li:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .slide.active .slide-content li:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .slide.active .slide-content li:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .tech-card {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .slide.active .tech-card {
+            animation: cardFadeIn 0.6s ease-out forwards;
+        }
+
+        .slide.active .tech-card:nth-child(1) { animation-delay: 0.1s; }
+        .slide.active .tech-card:nth-child(2) { animation-delay: 0.2s; }
+        .slide.active .tech-card:nth-child(3) { animation-delay: 0.3s; }
+        .slide.active .tech-card:nth-child(4) { animation-delay: 0.4s; }
+        .slide.active .tech-card:nth-child(5) { animation-delay: 0.5s; }
+        .slide.active .tech-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes cardFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Efeito de brilho nos slides */
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 170, 116, 0.1) 0%, transparent 70%);
+            animation: glowRotate 20s infinite linear;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes glowRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Garantir que o conteúdo fique acima dos elementos flutuantes */
+        .presentation-container {
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Efeito de partículas nos cards */
+        .deploy-card::after,
+        .tech-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, rgba(59, 170, 116, 0.3), rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+            border-radius: 18px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .deploy-card:hover::after,
+        .tech-card:hover::after {
+            opacity: 1;
+            animation: borderGlow 2s infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% {
+                filter: blur(5px);
+            }
+            50% {
+                filter: blur(10px);
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 24px;
+            }
+
+            .slide-header h1 {
+                font-size: 32px;
+            }
+
+            .slide-header h2 {
+                font-size: 28px;
+            }
+
+            .tech-grid,
+            .deploy-options {
+                grid-template-columns: 1fr;
+            }
+
+            .slide-number {
+                top: 20px;
+                right: 20px;
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .floating-element {
+                opacity: 0.7;
+            }
+
+            .floating-element:nth-child(1),
+            .floating-element:nth-child(5),
+            .floating-element:nth-child(10),
+            .floating-element:nth-child(11),
+            .floating-element:nth-child(12) {
+                display: none;
+            }
+
+            .dot-grid {
+                opacity: 0.2;
+            }
+
+            .glow-orb {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Grid de pontos -->
+    <div class="dot-grid"></div>
+
+    <!-- Elementos Flutuantes -->
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+
+        <!-- Partículas pequenas -->
+        <div class="particle" style="top: 20%; left: 15%; animation-delay: 0s;"></div>
+        <div class="particle" style="top: 40%; left: 80%; animation-delay: 1s;"></div>
+        <div class="particle" style="top: 60%; left: 25%; animation-delay: 2s;"></div>
+        <div class="particle" style="top: 80%; left: 70%; animation-delay: 3s;"></div>
+        <div class="particle" style="top: 30%; left: 50%; animation-delay: 4s;"></div>
+        <div class="particle" style="top: 70%; left: 10%; animation-delay: 5s;"></div>
+        <div class="particle" style="top: 10%; left: 60%; animation-delay: 6s;"></div>
+        <div class="particle" style="top: 50%; left: 90%; animation-delay: 7s;"></div>
+
+        <!-- Linhas decorativas -->
+        <div class="decorative-line" style="top: 25%; width: 300px; animation-delay: 0s;"></div>
+        <div class="decorative-line" style="top: 65%; width: 250px; animation-delay: 5s;"></div>
+        <div class="decorative-line vertical" style="left: 20%; top: 10%; animation-delay: 10s;"></div>
+        <div class="decorative-line vertical" style="right: 25%; top: 30%; animation-delay: 15s;"></div>
+
+        <!-- Orbs luminosos -->
+        <div class="glow-orb" style="width: 200px; height: 200px; top: 15%; left: 10%; background: rgba(59, 170, 116, 0.2); animation-delay: 0s;"></div>
+        <div class="glow-orb" style="width: 150px; height: 150px; bottom: 20%; right: 15%; background: rgba(102, 126, 234, 0.2); animation-delay: 3s;"></div>
+        <div class="glow-orb" style="width: 180px; height: 180px; top: 50%; right: 30%; background: rgba(118, 75, 162, 0.15); animation-delay: 6s;"></div>
+    </div>
+
+    <div class="presentation-container">
+        <div class="slide-number">
+            <span id="current-slide">1</span> / <span id="total-slides">12</span>
+        </div>
+
+        <!-- Slide 1: Introdução -->
+        <div class="slide active">
+            <div class="slide-header">
+                <h1>MeuProvedor</h1>
+                <p>Área do Cliente - Apresentação Completa</p>
+            </div>
+            <div class="slide-content">
+                <p style="text-align: center; font-size: 18px; color: var(--text-secondary); margin-top: 40px;">
+                    Aplicativo mobile-first para gerenciamento de serviços de provedor de internet.<br>
+                    Interface moderna, intuitiva e totalmente responsiva.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Sistema de Autenticação -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>
+                    <svg class="icon" style="display: inline-block; margin-right: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Sistema de Autenticação
+                </h2>
+            </div>
+            <div class="slide-content">
+                <ul>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                                <polyline points="10 17 15 12 10 7"></polyline>
+                                <line x1="15" y1="12" x2="3" y2="12"></line>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Login Funcional:</strong> Autenticação via backend PHP com validação de credenciais
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Cadastro de Usuários:</strong> Registro completo com validação de dados e hash de senha
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Segurança:</strong> Password hashing (bcrypt), sessões PHP, proteção CSRF
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12l2 2 4-4"></path>
+                                <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
+                                <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Integração Backend:</strong> API REST completa com MySQL para persistência de dados
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 3: Menu Home -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>
+                    <svg class="icon" style="display: inline-block; margin-right: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    Menu Home - Dinâmico
+                </h2>
+            </div>
+            <div class="slide-content">
+                <ul>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Banner Promocional:</strong> Slider rotativo com promoções e ofertas especiais
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Fatura Automática:</strong> Calcula automaticamente a soma de todos os planos contratados
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                                <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Velocidade WiFi:</strong> Mostra velocidade contratada (Mbps) extraída automaticamente do plano
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Meus Planos:</strong> Lista dinâmica de planos contratados com detalhes completos
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Ações Rápidas:</strong> Acesso rápido a faturas, suporte, planos e loja
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 4: Menu Faturas - Dinâmico -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>
+                    <svg class="icon" style="display: inline-block; margin-right: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                    </svg>
+                    Menu Faturas - Dinâmico
+                </h2>
+            </div>
+            <div class="slide-content">
+                <ul>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="2" x2="12" y2="22"></line>
+                                <polyline points="19 12 12 19 5 12"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Geração Automática:</strong> Faturas geradas dinamicamente baseadas nos planos contratados
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Cálculo Inteligente:</strong> Valor total calculado automaticamente somando todos os planos ativos
+                        </div>
+                    </li>
+                    <li>
+<div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+    </svg>
+</div>
+<div>
+                            <strong>Detalhes Completos:</strong> Mostra todos os planos incluídos em cada fatura com valores individuais
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Status Inteligente:</strong> Paga, Pendente ou Atrasada com cores diferenciadas e cálculo automático
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Histórico Completo:</strong> Últimos 3 meses pagos + próxima fatura pendente
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 5: Loja de Planos - Funcional -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>
+                    <svg class="icon" style="display: inline-block; margin-right: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                    </svg>
+                    Loja de Planos - Funcional
+                </h2>
+            </div>
+            <div class="slide-content">
+                <ul>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Categorias de Planos:</strong> WiFi, Móvel, Pacotes e Streaming com filtros funcionais
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Extração Inteligente:</strong> Dados do plano extraídos automaticamente (nome, velocidade, preço, features)
+</div>
+</li>
+<li>
+<div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+</div>
+<div>
+                            <strong>Assinatura Dinâmica:</strong> Planos salvos no localStorage e sincronizados com a home
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                                <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Velocidade Correta:</strong> Extrai velocidade do nome do plano (ex: "Fibra 200MB" → "200 Mbps")
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <strong>Substituição Automática:</strong> Ao assinar novo plano WiFi, substitui automaticamente o anterior
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+        <!-- Slide 6: Menu Produtos -->
+<div class="slide">
+<div class="slide-header">
+<h2>
+<svg class="icon" style="display: inline-block; margin-right: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+<line x1="3" y1="6" x2="21" y2="6"></line>
+<path d="M16 10a4 4 0 0 1-8 0"></path>
+</svg>
+Menu Produtos
+</h2>
+</div>
+<div class="slide-content">
+<ul>
+<li>
+<div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+    </svg>
+</div>
+<div>
+    <strong>Loja Completa:</strong> Celulares, fones, tablets e acessórios
+</div>
+</li>
+<li>
+<div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+    </svg>
+</div>
+<div>
+    <strong>Filtros por Categoria:</strong> Fácil navegação e busca de produtos
+</div>
+</li>
+<li>
+<div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 2h-3a4 4 0 0 0-4 4v3a4 4 0 0 0 4 4h3a4 4 0 0 0 4-4V6a4 4 0 0 0-4-4z"></path>
+        <path d="M6 2H3a4 4 0 0 0-4 4v3a4 4 0 0 0 4 4h3a4 4 0 0 0 4-4V6a4 4 0 0 0-4-4z"></path>
+        <path d="M18 13h-3a4 4 0 0 0-4 4v3a4 4 0 0 0 4 4h3a4 4 0 0 0 4-4v-3a4 4 0 0 0-4-4z"></path>
+        <path d="M6 13H3a4 4 0 0 0-4 4v3a4 4 0 0 0 4 4h3a4 4 0 0 0 4-4v-3a4 4 0 0 0-4-4z"></path>
+    </svg>
+</div>
+<div>
+    <strong>Detalhes Completos:</strong> Especificações técnicas e imagens dos produtos
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+        <!-- Slide 7: Menu Suporte -->
+<div class="slide">
+<div class="slide-header">
+<h2>
+<svg class="icon" style="display: inline-block; margin-right: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+</svg>
+Menu Suporte
+</h2>
+</div>
+<div class="slide-content">
+<ul>
+<li>
+<div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+    </svg>
+</div>
+<div>
+    <strong>Abrir Chamados:</strong> Suporte técnico, comercial e financeiro
+</div>
+</li>
+<li>
+<div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+    </svg>
+</div>
+<div>
+    <strong>Histórico:</strong> Acompanhar todos os chamados anteriores
+</div>
+</li>
+<li>
+<div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+</div>
+<div>
+    <strong>Status:</strong> Ver se o chamado está aberto, em andamento ou resolvido
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+        <!-- Slide 8: Menu Conta -->
+<div class="slide">
+<div class="slide-header">
+<h2>
+<svg class="icon" style="display: inline-block; margin-right: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+<circle cx="12" cy="7" r="4"></circle>
+</svg>
+Menu Conta
+</h2>
+</div>
+<div class="slide-content">
+<ul>
+<li>
+<div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+    </svg>
+</div>
+<div>
+    <strong>Dados Pessoais:</strong> Nome, CPF, e-mail e telefone
+</div>
+</li>
+<li>
+<div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"></path>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+    </svg>
+</div>
+<div>
+    <strong>Editar Informações:</strong> Atualizar dados pessoais e de contato
+</div>
+</li>
+<li>
+<div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+</div>
+<div>
+    <strong>Plano Contratado:</strong> Ver detalhes do plano ativo e histórico
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+        <!-- Slide 9: Funcionalidades Implementadas -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Funcionalidades Implementadas</h2>
+                <p>Todas as features funcionais do sistema</p>
+            </div>
+            <div class="slide-content">
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h3>✅ Autenticação</h3>
+                        <p>Login, Cadastro, Sessões, Proteção de rotas, Logout</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>✅ Planos Dinâmicos</h3>
+                        <p>Assinatura, Armazenamento LocalStorage, Sincronização Home</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>✅ Faturas Automáticas</h3>
+                        <p>Cálculo dinâmico, Geração automática, Histórico completo</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>✅ Home Inteligente</h3>
+                        <p>Velocidade WiFi correta, Fatura atualizada, Planos renderizados</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>✅ Extração de Dados</h3>
+                        <p>Velocidade do nome, Preços formatados, Features completas</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>✅ Integração Backend</h3>
+                        <p>API REST, MySQL, Autenticação, Sessões PHP</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Tecnologias Usadas -->
+<div class="slide">
+<div class="slide-header">
+<h2>Tecnologias Utilizadas</h2>
+<p>Stack tecnológico completo do projeto</p>
+</div>
+<div class="slide-content">
+<div class="tech-grid">
+<div class="tech-card">
+<h3>Frontend</h3>
+                        <p>HTML5, CSS3, JavaScript Vanilla, SVG Icons, Poppins Font, LocalStorage API</p>
+</div>
+<div class="tech-card">
+<h3>Backend</h3>
+                        <p>PHP 8.0+, MySQL 5.7+, RESTful API, Sessions, Password Hashing</p>
+</div>
+<div class="tech-card">
+<h3>Design</h3>
+<p>Mobile-First, Responsivo, Design System com variáveis CSS</p>
+</div>
+<div class="tech-card">
+<h3>Arquitetura</h3>
+                        <p>MVC, API REST, SPA (Single Page Application), LocalStorage</p>
+</div>
+<div class="tech-card">
+<h3>Segurança</h3>
+                        <p>Prepared Statements, Password Hash (bcrypt), CORS, Sanitização</p>
+</div>
+<div class="tech-card">
+<h3>Database</h3>
+<p>MySQL/MariaDB, Relacionamentos, Índices, Foreign Keys</p>
+</div>
+</div>
+</div>
+</div>
+
+        <!-- Slide 11: Opções de Deploy -->
+<div class="slide">
+<div class="slide-header">
+<h2>Opções de Deploy</h2>
+                <p>Plataformas para publicar o aplicativo</p>
+</div>
+<div class="slide-content">
+<div class="deploy-options">
+<div class="deploy-card">
+                        <h3>App Mobile</h3>
+                        <ul>
+                            <li>App Store (iOS)</li>
+                            <li>Play Store (Android)</li>
+                            <li>Capacitor / Cordova</li>
+                            <li>React Native</li>
+                            <li>PWA (Progressive Web App)</li>
+</ul>
+</div>
+<div class="deploy-card">
+<h3>Backend</h3>
+<ul>
+                            <li>Hostinger (Recomendado)</li>
+    <li>Render (Gratuito)</li>
+    <li>DigitalOcean</li>
+                            <li>Heroku</li>
+    <li>AWS / Azure</li>
+</ul>
+</div>
+<div class="deploy-card">
+<h3>Database</h3>
+<ul>
+    <li>MySQL Hospedado</li>
+    <li>AWS RDS</li>
+    <li>PlanetScale</li>
+    <li>Supabase</li>
+    <li>Clever Cloud</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+        <!-- Slide 12: Como Fazer Deploy -->
+<div class="slide">
+<div class="slide-header">
+<h2>Como Fazer Deploy</h2>
+                <p>Passo a passo para publicar nas App Stores</p>
+</div>
+<div class="slide-content">
+<div style="background: var(--bg-secondary); padding: 32px; border-radius: 16px; margin-top: 20px;">
+                    <div style="margin-bottom: 24px;">
+                        <h3 style="color: var(--primary-color); font-size: 20px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <svg style="width: 24px; height: 24px; stroke: var(--primary-color);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                            </svg>
+                            Empacotamento Mobile
+                        </h3>
+                        <ol style="padding-left: 20px; line-height: 2.2; margin-bottom: 24px;">
+                            <li><strong>Instalar Capacitor:</strong> npm install @capacitor/core @capacitor/cli</li>
+                            <li><strong>Inicializar:</strong> npx cap init</li>
+                            <li><strong>Adicionar Plataformas:</strong> npx cap add ios | npx cap add android</li>
+                            <li><strong>Build:</strong> Compilar frontend para produção</li>
+                            <li><strong>Sync:</strong> npx cap sync (copia arquivos para app nativo)</li>
+                        </ol>
+                    </div>
+                    <div style="margin-bottom: 24px;">
+                        <h3 style="color: var(--primary-color); font-size: 20px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <svg style="width: 24px; height: 24px; stroke: var(--primary-color);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                            </svg>
+                            Backend & Database
+                        </h3>
+                        <ol style="padding-left: 20px; line-height: 2.2; margin-bottom: 24px;">
+                            <li><strong>Backend:</strong> Upload PHP via FTP (Hostinger) ou Git (Render)</li>
+                            <li><strong>Database:</strong> Importar schema.sql no MySQL</li>
+                            <li><strong>Config:</strong> Atualizar config.php com URLs de produção</li>
+                            <li><strong>HTTPS:</strong> Configurar certificado SSL</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary-color); font-size: 20px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                            <svg style="width: 24px; height: 24px; stroke: var(--primary-color);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                            Publicação
+                        </h3>
+                        <ol style="padding-left: 20px; line-height: 2.2;">
+                            <li><strong>App Store:</strong> Build iOS → Xcode → Submit para review</li>
+                            <li><strong>Play Store:</strong> Build Android → Google Play Console → Upload APK/AAB</li>
+                            <li><strong>API URLs:</strong> Atualizar URLs no app.js para apontar ao backend</li>
+<li><strong>Teste:</strong> Validar todas as funcionalidades em produção</li>
+</ol>
+                    </div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Navegação -->
+<div class="navigation">
+<button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<polyline points="15 18 9 12 15 6"></polyline>
+</svg>
+</button>
+<button class="nav-btn" id="next-btn" onclick="changeSlide(1)">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<polyline points="9 18 15 12 9 6"></polyline>
+</svg>
+</button>
+</div>
+
+<!-- Indicadores -->
+<div class="slide-indicator" id="indicators"></div>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+
+// Atualizar contador total
+document.getElementById('total-slides').textContent = totalSlides;
+
+// Criar indicadores
+const indicatorsContainer = document.getElementById('indicators');
+for (let i = 0; i < totalSlides; i++) {
+const dot = document.createElement('div');
+dot.className = 'indicator-dot' + (i === 0 ? ' active' : '');
+dot.onclick = () => goToSlide(i);
+indicatorsContainer.appendChild(dot);
+}
+
+function showSlide(n) {
+// Validar índice
+if (n >= totalSlides) currentSlide = 0;
+if (n < 0) currentSlide = totalSlides - 1;
+
+// Esconder todos os slides
+slides.forEach(slide => slide.classList.remove('active'));
+
+// Mostrar slide atual
+slides[currentSlide].classList.add('active');
+
+// Atualizar indicadores
+const dots = document.querySelectorAll('.indicator-dot');
+dots.forEach((dot, index) => {
+dot.classList.toggle('active', index === currentSlide);
+});
+
+// Atualizar número do slide
+document.getElementById('current-slide').textContent = currentSlide + 1;
+
+// Atualizar botões
+document.getElementById('prev-btn').disabled = currentSlide === 0;
+document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+}
+
+function changeSlide(direction) {
+currentSlide += direction;
+showSlide(currentSlide);
+}
+
+function goToSlide(n) {
+currentSlide = n;
+showSlide(currentSlide);
+}
+
+// Navegação por teclado
+document.addEventListener('keydown', (e) => {
+if (e.key === 'ArrowLeft') changeSlide(-1);
+if (e.key === 'ArrowRight') changeSlide(1);
+});
+
+// Inicializar
+showSlide(0);
+
+// Autoplay opcional (descomente se quiser)
+// setInterval(() => changeSlide(1), 5000);
+</script>
+</body>
+</html>

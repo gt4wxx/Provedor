@@ -1,0 +1,106 @@
+<div class="page conta-page">
+    <header class="page-header">
+        <h1>Minha Conta</h1>
+        <p>Gerencie suas informações</p>
+    </header>
+
+    <main class="page-content">
+        <section class="profile-section">
+            <div class="profile-card">
+                <div class="profile-avatar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <h2 id="profile-name">Cliente</h2>
+            </div>
+        </section>
+
+        <section class="dados-section">
+            <h2 class="section-title">Dados Pessoais</h2>
+            
+            <div class="info-card">
+                <div class="info-item">
+                    <span class="info-label">Nome Completo</span>
+                    <span class="info-value" id="info-nome">João Silva</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">CPF</span>
+                    <span class="info-value" id="info-cpf">000.000.000-00</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">E-mail</span>
+                    <span class="info-value" id="info-email">joao.silva@email.com</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Telefone</span>
+                    <span class="info-value" id="info-telefone">(11) 99999-9999</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="plano-section">
+            <h2 class="section-title">Plano Contratado</h2>
+            
+            <div class="plano-info-card">
+                <div class="plano-info-header">
+                    <span class="plano-info-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </span>
+                    <div>
+                        <h3>Fibra 200MB</h3>
+                        <span class="plano-info-subtitle">Plano Ativo</span>
+                    </div>
+                </div>
+                <div class="plano-info-details">
+                    <div class="detail-item">
+                        <span>Data de Contratação:</span>
+                        <span>15/08/2024</span>
+                    </div>
+                    <div class="detail-item">
+                        <span>Próxima Fatura:</span>
+                        <span>15/12/2024</span>
+                    </div>
+                    <div class="detail-item">
+                        <span>Valor Mensal:</span>
+                        <span>R$ 149,90</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="actions-section">
+            <button class="btn-primary btn-full" id="btn-editar-dados">Editar Dados</button>
+            <button class="btn-secondary btn-full" id="btn-sair">Sair</button>
+        </section>
+    </main>
+
+    <!-- Modal de Edição -->
+    <div id="editar-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Editar Dados</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="editar-form" class="modal-body">
+                <div class="form-group">
+                    <label for="edit-nome">Nome Completo</label>
+                    <input type="text" id="edit-nome" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-email">E-mail</label>
+                    <input type="email" id="edit-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-telefone">Telefone</label>
+                    <input type="tel" id="edit-telefone" name="telefone" required>
+                </div>
+                <button type="submit" class="btn-primary">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+</div>
+

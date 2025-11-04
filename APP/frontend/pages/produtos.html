@@ -1,0 +1,90 @@
+<div class="page produtos-page">
+    <header class="page-header">
+        <h1>Loja de Produtos</h1>
+        <p>Celulares, fones, acessórios e muito mais</p>
+    </header>
+
+    <main class="page-content">
+        <!-- Filtros de Categoria -->
+        <section class="filtros-section">
+            <div class="filtros-container">
+                <button class="filtro-btn active" data-categoria="todos">
+                    <span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                    </span>
+                    <span>Todos</span>
+                </button>
+                <button class="filtro-btn" data-categoria="celular">
+                    <span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
+                    </span>
+                    <span>Celulares</span>
+                </button>
+                <button class="filtro-btn" data-categoria="fone">
+                    <span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5z"></path>
+                            <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5z"></path>
+                        </svg>
+                    </span>
+                    <span>Fones</span>
+                </button>
+                <button class="filtro-btn" data-categoria="tablet">
+                    <span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
+                    </span>
+                    <span>Tablets</span>
+                </button>
+                <button class="filtro-btn" data-categoria="acessorio">
+                    <span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 6v6l4 2"></path>
+                        </svg>
+                    </span>
+                    <span>Acessórios</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Grid de Produtos -->
+        <section class="produtos-section">
+            <div id="produtos-loading" class="loading-state" style="text-align: center; padding: 40px; color: #6b7280;">
+                <p>Carregando produtos...</p>
+            </div>
+            
+            <div id="produtos-grid" class="produtos-grid" style="display: none;">
+                <!-- Produtos serão inseridos aqui via JavaScript -->
+            </div>
+            
+            <div id="produtos-empty" class="empty-state" style="display: none; text-align: center; padding: 40px; color: #6b7280;">
+                <p>Nenhum produto encontrado nesta categoria.</p>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- Modal de Detalhes do Produto -->
+<div id="produto-modal" class="modal">
+    <div class="modal-content modal-large">
+        <div class="modal-header">
+            <h2 id="modal-produto-nome">Nome do Produto</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body" id="modal-produto-body">
+            <!-- Conteúdo será inserido via JavaScript -->
+        </div>
+    </div>
+</div>
+
